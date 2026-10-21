@@ -47,3 +47,6 @@ run(renderer="skia")
 #     # Gestion du clic ultra simple
 #     if carre1[0] <= pos[0] <= carre1[0] + carre1[2] and carre1[1] <= pos[1] <= carre1[1] + carre1[3]:
 #         carre1[1] += 10
+
+# temp = millis 100 puis 2000
+# temp - secondtemps >= 2000:
