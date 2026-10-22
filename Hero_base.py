@@ -14,5 +14,6 @@ class Hero:
 	def est_vie(self, objet):
 		return objet.vie <= 0
 
-	
+	def change_temps(self, new): #temp
+		self.last_action = new
 
