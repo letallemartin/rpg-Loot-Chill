@@ -1,3 +1,4 @@
+from p5 import *
 class Hero:
 	def __init__(self, vie, max_vie, attaque, argent, last_action):
 		self.vie = vie

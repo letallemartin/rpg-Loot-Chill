@@ -17,8 +17,8 @@ def draw():
 	rect((joueur[0], joueur[1]), joueur[2], joueur[2])
 	for i in range(len(jeu.tab)):
 		ennemi = jeu.tab[i]
-		jeu.action_enemie()
-		rect(ennemi.pos[0],ennemi.pos[1])
+		jeu.action_ennemi(ennemi)
+		rect(ennemi.pos[0],ennemi.pos[1],50,50)
 
 def mouse_pressed():
 	pass
