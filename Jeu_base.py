@@ -1,4 +1,4 @@
-from p5 import *
+import pygame
 import random
 from Ennemie_base import Ennemie
 from Hero_base import Hero
@@ -16,7 +16,7 @@ class Jeu:
 		return perso.vie > 0
 
 	def action_ennemi(self, en):
-		temp = millis()
+		temp = pygame.time.get_ticks()
 		if temp - en.last_action >= 1000:
 			if en.pos[0] >= 150:
 				en.change_pos(-25, 0)
@@ -36,12 +36,11 @@ class Jeu:
 	
 
 	def attaque_hero(self):
-		temp = millis()
-		if temp - self.hero.last_action >= 1000 and len(self.tab) > 0:
+		temp = pygame.time.get_ticks()
+		if temp - self.hero.last_action >= 3000 and len(self.tab) > 0:
 			ennemi_cible = self.tab[0]
-			proj = Projectile([self.hero_pos[0], self.hero_pos[1]], 10, [ennemi_cible.pos[0], ennemi_cible.pos[1]])
+			proj = Projectile([self.hero_pos[0] + self.hero_pos[2], self.hero_pos[1] + 25], 10, [ennemi_cible.pos[0], ennemi_cible.pos[1]])
 			self.tab_proj.append(proj)
-			# ennemi_cible.change_valeur("vie", -self.hero.attaque + 9)
 			print(f"pv ennemi : {ennemi_cible.vie}")
 			self.hero.change_temps(temp)
 			print(f"temp: {temp}, temp - last: {temp - self.hero.last_action}, derniere action: {self.hero.last_action}")
@@ -54,7 +53,8 @@ class Jeu:
 			for pr in self.tab_proj:
 				pr.deplace_projectile()
 				if pr.est_touché():
-					self.tab[0].change_valeur("vie", -self.hero.attaque + 9)
+					self.tab[0].change_valeur("vie", -self.hero.attaque)
+					self.tab_proj.remove(pr)
 
 
 
