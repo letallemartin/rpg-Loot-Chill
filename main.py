@@ -12,7 +12,6 @@ running = True
 
 clock = pygame.time.Clock()
 
-
 while running:
 	affichage.DrawFond()
 	for event in pygame.event.get():
@@ -29,7 +28,7 @@ while running:
 					print(f"att={hero1.attaque}")
 	affichage.DrawUpgrade(affichage.bouton_vie, affichage.bouton_attaque, affichage.texte_vie, affichage.texte_attaque)
 	affichage.DrawJoueur(joueur, hero1)
-	jeu.spawn_ennemie()
+	jeu.spawn_ennemi()
 	jeu.attaque_hero()
 	for i in range (len(jeu.tab_proj)):
 		proj = jeu.tab_proj[i]
@@ -40,7 +39,5 @@ while running:
 		affichage.DrawEnnemi(ennemi)
 	pygame.display.flip()
 
-
-	
 clock.tick(60)
 pygame.quit()

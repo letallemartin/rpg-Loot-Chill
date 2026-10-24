@@ -1,11 +1,11 @@
 from p5 import *
 class Ennemie:
-	def __init__(self, vie, max_vie, attaque, last_action,pos):
+	def __init__(self, vie, attaque, last_action,pos, level):
 		self.vie = vie
-		self.max_vie = max_vie
 		self.attaque = attaque
 		self.last_action = last_action
 		self.pos = pos #liste [x, y, x taille, y taille]
+		self.level = level
 
 	def change_valeur(self,valeur, new): # vie / attaque / max_vie 
 			act = getattr(self, valeur)

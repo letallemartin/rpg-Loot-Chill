@@ -11,7 +11,6 @@ class Jeu:
 		self.hero_pos = hero_pos
 		self.tab_proj = tab_proj
 
-	
 	def est_vie(self, perso):
 		return perso.vie > 0
 
@@ -25,15 +24,22 @@ class Jeu:
 			en.change_temps(temp)
 		# print(f"temp: {temp}, ecart: {temp - en.last_action}, derniere action: {en.last_action}")
 
-	def spawn_ennemie(self):
+	def spawn_ennemi(self):
 		if len(self.tab) < 4:
 			x = random.randint(600, 700)
-			y = random.randint(50, 400)
-			ennemie = Ennemie(50, 50,10, 0, [x, y, 50, 50])
-			self.tab.append(ennemie)
-			print(ennemie)
+			y = random.randint(50, 350)
+			ennemi = self.type_ennemi(x, y)
+			self.tab.append(ennemi)
 
-	
+	def type_ennemi(self, x, y):
+		luk = random.randint(1,100)
+		if luk <= 60:
+			ennemi = Ennemie(40,10, 0, [x, y, 50, 50], 1)
+		elif luk <= 80:
+			ennemi = Ennemie(65,10, 0, [x, y, 50, 50], 2)
+		else:
+			ennemi = Ennemie(100,10, 0, [x, y, 50, 50], 3)
+		return ennemi
 
 	def attaque_hero(self):
 		temp = pygame.time.get_ticks()
@@ -41,9 +47,7 @@ class Jeu:
 			ennemi_cible = self.tab[0]
 			proj = Projectile([self.hero_pos[0] + self.hero_pos[2], self.hero_pos[1] + 25], 10, [ennemi_cible.pos[0], ennemi_cible.pos[1]])
 			self.tab_proj.append(proj)
-			print(f"pv ennemi : {ennemi_cible.vie}")
 			self.hero.change_temps(temp)
-			print(f"temp: {temp}, temp - last: {temp - self.hero.last_action}, derniere action: {self.hero.last_action}")
 		self.action_projectile()
 		if not self.est_vie(self.tab[0]):
 			self.tab.pop(0)
@@ -55,9 +59,6 @@ class Jeu:
 				if pr.est_touché():
 					self.tab[0].change_valeur("vie", -self.hero.attaque)
 					self.tab_proj.remove(pr)
-
-
-
 
 # def attaque_hero(self):
 # 		temp = millis()

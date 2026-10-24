@@ -3,8 +3,14 @@ import pygame
 joueur_img = pygame.image.load("images/hero1.png")
 joueur_img = pygame.transform.scale(joueur_img, (125, 125))
 paysage_img = pygame.image.load("images/paysage.jpeg")
+
 slime_img = pygame.image.load("images/slime.png")
 slime_img = pygame.transform.scale(slime_img, (125, 125))
+slime_img2 = pygame.image.load("images/slime2.png")
+slime_img2 = pygame.transform.scale(slime_img2, (125, 125))
+slime_img3 = pygame.image.load("images/slime3.png")
+slime_img3 = pygame.transform.scale(slime_img3, (150, 150))
+
 fire_img = pygame.image.load("images/fire.png")
 fire_img = pygame.transform.scale(fire_img, (100, 100))
 
@@ -21,9 +27,16 @@ def DrawFond():
 	fenetre.blit(paysage_img, (0, 0))
 
 def DrawEnnemi(ennemi):
+	if ennemi.level == 1:
+		fenetre.blit(slime_img, (ennemi.pos[0], ennemi.pos[1]))
+	elif ennemi.level == 2:
+		fenetre.blit(slime_img2, (ennemi.pos[0], ennemi.pos[1]))
+	else:
+		fenetre.blit(slime_img3, (ennemi.pos[0], ennemi.pos[1]))
 	text1 = police.render(f"PV: {ennemi.vie}", True, (20, 20, 20))
 	fenetre.blit(text1, (ennemi.pos[0] + 35, ennemi.pos[1] + 10))
-	fenetre.blit(slime_img, (ennemi.pos[0], ennemi.pos[1]))
+
+
 
 def DrawFire(projectile):
 	fire_img2 = pygame.transform.rotate(fire_img, projectile.angle)
