@@ -1,4 +1,3 @@
-from p5 import *
 class Ennemie:
 	def __init__(self, vie, attaque, last_action,pos, level):
 		self.vie = vie

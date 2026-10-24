@@ -26,8 +26,8 @@ while running:
 				elif affichage.bouton_attaque.collidepoint(event.pos):
 					hero1.change_valeur("attaque",10)
 					print(f"att={hero1.attaque}")
-	affichage.DrawUpgrade(affichage.bouton_vie, affichage.bouton_attaque, affichage.texte_vie, affichage.texte_attaque)
-	affichage.DrawJoueur(joueur, hero1)
+				elif affichage.bouton_inventaire.collidepoint(event.pos):
+					print(f"inv=oui")
 	jeu.spawn_ennemi()
 	jeu.attaque_hero()
 	for i in range (len(jeu.tab_proj)):
@@ -37,6 +37,11 @@ while running:
 		ennemi = jeu.tab[i]
 		jeu.action_ennemi(ennemi)
 		affichage.DrawEnnemi(ennemi)
+	
+	affichage.DrawUpgrade(affichage.bouton_vie, affichage.bouton_attaque,affichage.bouton_inventaire, affichage.texte_vie, affichage.texte_attaque,affichage.texte_inventaire)
+	affichage.DrawJoueur(joueur, hero1)
+	affichage.DrawXP()
+	
 	pygame.display.flip()
 
 clock.tick(60)

@@ -22,7 +22,6 @@ class Jeu:
 			else:
 				self.hero.change_valeur("vie", -en.attaque)
 			en.change_temps(temp)
-		# print(f"temp: {temp}, ecart: {temp - en.last_action}, derniere action: {en.last_action}")
 
 	def spawn_ennemi(self):
 		if len(self.tab) < 4:
@@ -41,6 +40,7 @@ class Jeu:
 			ennemi = Ennemie(100,10, 0, [x, y, 50, 50], 3)
 		return ennemi
 
+
 	def attaque_hero(self):
 		temp = pygame.time.get_ticks()
 		if temp - self.hero.last_action >= 3000 and len(self.tab) > 0:
@@ -48,17 +48,29 @@ class Jeu:
 			proj = Projectile([self.hero_pos[0] + self.hero_pos[2], self.hero_pos[1] + 25], 10, [ennemi_cible.pos[0], ennemi_cible.pos[1]])
 			self.tab_proj.append(proj)
 			self.hero.change_temps(temp)
-		self.action_projectile()
-		if not self.est_vie(self.tab[0]):
-			self.tab.pop(0)
+		if self.action_projectile():
+			self.tab[0].change_valeur("vie", -self.hero.attaque)
+			if not self.est_vie(self.tab[0]):
+				self.verif_xp(self.tab[0])
+				self.tab.pop(0)
+
 
 	def action_projectile(self):
 		if len(self.tab_proj) > 0:
 			for pr in self.tab_proj:
 				pr.deplace_projectile()
 				if pr.est_touché():
-					self.tab[0].change_valeur("vie", -self.hero.attaque)
 					self.tab_proj.remove(pr)
+					return True
+
+	def verif_xp(self, ennemi_cible): #peut etre futur pr global recompenses
+		if ennemi_cible.level == 1:
+			self.hero.change_dico("actuelle", 5)
+		elif ennemi_cible.level == 2:
+			self.hero.change_dico("actuelle", 10)
+		elif ennemi_cible.level == 2:
+			self.hero.change_dico("actuelle", 20)
+		self.hero.verif_level()
 
 # def attaque_hero(self):
 # 		temp = millis()
