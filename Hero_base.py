@@ -4,8 +4,8 @@ class Hero:
 		self.max_vie = max_vie #int
 		self.attaque = attaque #int
 		self.argent = argent #int
+		self.last_action = last_action
 		self.xp = xp #dico
-		self.last_action = last_action 
 
 	def change_valeur(self,valeur, new):
 		act = getattr(self, valeur)

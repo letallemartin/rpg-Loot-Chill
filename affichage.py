@@ -17,13 +17,16 @@ fire_img = pygame.transform.scale(fire_img, (100, 100))
 fenetre = pygame.display.set_mode((800, 600))
 police = pygame.font.SysFont(None, 25)
 
-bouton_vie =  pygame.draw.rect(fenetre, (30,40,40), (50,500,200,60))
-bouton_attaque = pygame.draw.rect(fenetre, (30,30,30), (300,500,200,60))
-bouton_inventaire = pygame.draw.rect(fenetre, (30,30,30), (550,500,200,60))
+bouton_vie = {"rect":pygame.draw.rect(fenetre, (50,150,90), (50,500,200,60)),
+"txt": police.render("ameliorer vie",True,(255,255,255)),"prix":10,"couleur":(50,150,90)}
 
-texte_attaque = police.render("ameliorer degats",True,(255,255,255))
-texte_vie = police.render("ameliorer vie",True,(255,255,255))
-texte_inventaire = police.render("inventaire",True,(255,255,255))
+bouton_attaque = {"rect":pygame.draw.rect(fenetre, (180,80,60), (300,500,200,60)),
+"txt" : police.render("ameliorer degats",True,(255,255,255)),"prix":10,"couleur":(180,80,60)}
+
+bouton_inventaire = {"rect":pygame.draw.rect(fenetre, (180,150,60), (550,500,200,60)),
+"txt": police.render("inventaire",True,(255,255,255)),"prix":10,"couleur":(180,150,60)}
+liste_bt =[bouton_vie,bouton_attaque,bouton_inventaire]
+
 
 def DrawFond():
 	fenetre.blit(paysage_img, (0, 0))
@@ -47,14 +50,11 @@ def DrawJoueur(pos, hero):
 	text2 = police.render(f"PV: {hero.vie}", True, (20, 20, 20))
 	fenetre.blit(text2, (pos[0] + 25, pos[1] - 5))
 
-def DrawUpgrade(bt_vie, bt_attq,bt_inventaire, txt_vie, txt_attq,txt_inventaire):
+def DrawUpgrade(liste_bt):
 	pygame.draw.rect(fenetre, (35, 35, 45), (0, 460, 800, 140))
-	pygame.draw.rect(fenetre,(50,150,90),bt_vie)
-	fenetre.blit(txt_vie,txt_vie.get_rect(center = bt_vie.center))
-	pygame.draw.rect(fenetre,(180,80,60),bt_attq)
-	fenetre.blit(txt_attq,txt_attq.get_rect(center = bt_attq.center))
-	pygame.draw.rect(fenetre,(180,150,60),bt_inventaire)
-	fenetre.blit(txt_inventaire,txt_inventaire.get_rect(center = bt_inventaire.center))
+	for bouton in liste_bt:
+		pygame.draw.rect(fenetre,bouton["couleur"],bouton["rect"])
+		fenetre.blit(bouton["txt"], bouton["txt"].get_rect(center = bouton["rect"].center))
 
 def DrawXP(hero):
 	txt_xp = police.render(f" level: {hero.xp["niveau"]}",True,(8,112,19)) 

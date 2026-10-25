@@ -3,7 +3,8 @@ from Jeu_base import Jeu
 from Hero_base import Hero
 from Ennemie_base import Ennemie
 pygame.init()
-import affichage 
+import affichage
+
 joueur = [50,200,50,50]
 hero1 = Hero(100,100,10,1000,0)
 jeu = Jeu([], hero1, [joueur[0], joueur[1], joueur[2], joueur[3]], [])
@@ -19,15 +20,17 @@ while running:
 			running = False
 		elif event.type == pygame.MOUSEBUTTONDOWN :
 			if event.button == 1 :
-				if affichage.bouton_vie.collidepoint(event.pos):
+				if affichage.liste_bt[0]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[0]): #bouton vie +
 					hero1.change_valeur("max_vie",10)
 					hero1.change_valeur("vie",10)
 					print(f"vie={hero1.vie}")
-				elif affichage.bouton_attaque.collidepoint(event.pos):
+				elif affichage.liste_bt[1]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[1]): #bouton attaque +
 					hero1.change_valeur("attaque",10)
+					hero1.argent -= 10
 					print(f"att={hero1.attaque}")
-				elif affichage.bouton_inventaire.collidepoint(event.pos):
+				elif affichage.liste_bt[2]["rect"].collidepoint(event.pos):
 					print(f"inv=oui")
+
 	jeu.spawn_ennemi()
 	jeu.attaque_hero()
 	for i in range (len(jeu.tab_proj)):
@@ -38,7 +41,7 @@ while running:
 		jeu.action_ennemi(ennemi)
 		affichage.DrawEnnemi(ennemi)
 	
-	affichage.DrawUpgrade(affichage.bouton_vie, affichage.bouton_attaque,affichage.bouton_inventaire, affichage.texte_vie, affichage.texte_attaque,affichage.texte_inventaire)
+	affichage.DrawUpgrade(affichage.liste_bt)
 	affichage.DrawJoueur(joueur, hero1)
 	affichage.DrawXP(hero1)
 	

@@ -40,7 +40,6 @@ class Jeu:
 			ennemi = Ennemie(100,10, 0, [x, y, 50, 50], 3)
 		return ennemi
 
-
 	def attaque_hero(self):
 		temp = pygame.time.get_ticks()
 		if temp - self.hero.last_action >= 3000 and len(self.tab) > 0:
@@ -51,9 +50,8 @@ class Jeu:
 		if self.action_projectile():
 			self.tab[0].change_valeur("vie", -self.hero.attaque)
 			if not self.est_vie(self.tab[0]):
-				self.verif_xp(self.tab[0])
+				self.verif_ennemi(self.tab[0])
 				self.tab.pop(0)
-
 
 	def action_projectile(self):
 		if len(self.tab_proj) > 0:
@@ -63,11 +61,19 @@ class Jeu:
 					self.tab_proj.remove(pr)
 					return True
 
-	def verif_xp(self, ennemi_cible): #peut etre futur pr global recompenses
+	def verif_ennemi(self, ennemi_cible): #peut etre futur pr global recompenses
 		if ennemi_cible.level == 1:
 			self.hero.change_dico("actuelle", 5)
+			self.hero.change_valeur("argent", 5)
 		elif ennemi_cible.level == 2:
 			self.hero.change_dico("actuelle", 10)
+			self.hero.change_valeur("argent", 10)
 		elif ennemi_cible.level == 3:
 			self.hero.change_dico("actuelle", 20)
+			self.hero.change_valeur("argent", 20)
 		self.hero.verif_level()
+
+	def est_argent(self, bouton):
+		if self.hero.argent >= bouton["prix"]:
+			bouton["prix"] *= 1.2
+			return True
