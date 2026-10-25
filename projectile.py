@@ -8,7 +8,7 @@ class Projectile:
 
 	def deplace_projectile(self):
 		try:
-			pente = (self.pos[1] - self.pos_cible[1] - 25) / (self.pos[0] - self.pos_cible[0]- 25)
+			pente = (self.pos_cible[1] - self.pos[1] + 25) / (self.pos_cible[0] - self.pos[0] + 25)
 			self.pos[0] += 2
 			self.pos[1] += pente * 2
 			self.angle = - ((math.atan(pente) * 180) / math.pi) # 45 = diff d'angle dui png
@@ -18,4 +18,3 @@ class Projectile:
 	def est_touché(self):
 		if self.pos_cible[0] < self.pos[0] < (self.pos_cible[0] + 50) and self.pos_cible[1] < self.pos[1] < self.pos_cible[1] + 50:
 			return True
-		
