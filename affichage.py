@@ -27,6 +27,8 @@ bouton_inventaire = {"rect":pygame.draw.rect(fenetre, (180,150,60), (550,500,200
 "txt": police.render("inventaire",True,(255,255,255)),"prix":10,"couleur":(180,150,60)}
 liste_bt =[bouton_vie,bouton_attaque,bouton_inventaire]
 
+# xp_cadre = pygame.image.load("images/fire.png")
+# xp_cadre = pygame.transform.scale(xp_cadre, (100, 100))
 
 def DrawFond():
 	fenetre.blit(paysage_img, (0, 0))
@@ -57,8 +59,14 @@ def DrawUpgrade(liste_bt):
 		fenetre.blit(bouton["txt"], bouton["txt"].get_rect(center = bouton["rect"].center))
 
 def DrawXP(hero):
-	txt_xp = police.render(f" level: {hero.xp["niveau"]}",True,(8,112,19)) 
+	txt_xp = police.render(f" level: {hero.xp["niveau"]}",True,(0,0,0)) 
 	fenetre.blit(txt_xp,(210, 25))
 	pygame.draw.rect(fenetre, (40, 40, 40), (10,10,200,50))
 	progression = 190 * hero.xp["actuelle"] / hero.xp["max"]
 	pygame.draw.rect(fenetre, (80, 1, 47), (15,15,progression,40))
+
+# def DrawXP(hero):
+#	txt_xp = police.render(f" level: {hero.xp["niveau"]}",True,(0,0,0)) 
+#	progression = 190 * hero.xp["actuelle"] / hero.xp["max"]
+#	pygame.draw.rect(fenetre, (18, 243, 18), (32,32,progression,26))
+#	fenetre.blit(xp_cadre, (0,-63))
