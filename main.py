@@ -40,7 +40,7 @@ while running:
 	
 	affichage.DrawUpgrade(affichage.bouton_vie, affichage.bouton_attaque,affichage.bouton_inventaire, affichage.texte_vie, affichage.texte_attaque,affichage.texte_inventaire)
 	affichage.DrawJoueur(joueur, hero1)
-	affichage.DrawXP()
+	affichage.DrawXP(hero1)
 	
 	pygame.display.flip()
 

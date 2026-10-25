@@ -20,6 +20,7 @@ police = pygame.font.SysFont(None, 25)
 bouton_vie =  pygame.draw.rect(fenetre, (30,40,40), (50,500,200,60))
 bouton_attaque = pygame.draw.rect(fenetre, (30,30,30), (300,500,200,60))
 bouton_inventaire = pygame.draw.rect(fenetre, (30,30,30), (550,500,200,60))
+
 texte_attaque = police.render("ameliorer degats",True,(255,255,255))
 texte_vie = police.render("ameliorer vie",True,(255,255,255))
 texte_inventaire = police.render("inventaire",True,(255,255,255))
@@ -55,6 +56,9 @@ def DrawUpgrade(bt_vie, bt_attq,bt_inventaire, txt_vie, txt_attq,txt_inventaire)
 	pygame.draw.rect(fenetre,(180,150,60),bt_inventaire)
 	fenetre.blit(txt_inventaire,txt_inventaire.get_rect(center = bt_inventaire.center))
 
-def DrawXP():
+def DrawXP(hero):
+	txt_xp = police.render(f" level: {hero.xp["niveau"]}",True,(8,112,19)) 
+	fenetre.blit(txt_xp,(210, 25))
 	pygame.draw.rect(fenetre, (40, 40, 40), (10,10,200,50))
-	pygame.draw.rect(fenetre, (80, 1, 47), (15,15,190,40))
+	progression = 190 * hero.xp["actuelle"] / hero.xp["max"]
+	pygame.draw.rect(fenetre, (80, 1, 47), (15,15,progression,40))

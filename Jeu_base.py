@@ -68,17 +68,6 @@ class Jeu:
 			self.hero.change_dico("actuelle", 5)
 		elif ennemi_cible.level == 2:
 			self.hero.change_dico("actuelle", 10)
-		elif ennemi_cible.level == 2:
+		elif ennemi_cible.level == 3:
 			self.hero.change_dico("actuelle", 20)
 		self.hero.verif_level()
-
-# def attaque_hero(self):
-# 		temp = millis()
-# 		if temp - self.hero.last_action >= 1000 and len(self.tab) > 0::
-# 			ennemi_cible = self.tab[0]
-# 			ennemi_cible.change_valeur("vie", -self.hero.attaque + 9)
-# 			print(f"pv ennemi : {ennemi_cible.vie}")
-# 			if not est_vie(ennemi_cible) <= 0:
-# 				self.tab.pop(0)
-# 			self.hero.change_temps(temp)
-# 			print(f"temp: {temp}, temp - last: {temp - self.hero.last_action}, derniere action: {self.hero.last_action}")
