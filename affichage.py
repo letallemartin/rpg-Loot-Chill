@@ -14,21 +14,24 @@ slime_img3 = pygame.transform.scale(slime_img3, (150, 150))
 fire_img = pygame.image.load("images/fire.png")
 fire_img = pygame.transform.scale(fire_img, (100, 100))
 
+sac_img = pygame.image.load("images/sac.png")
+sac_img = pygame.transform.scale(sac_img, (150, 100))
+
 fenetre = pygame.display.set_mode((800, 600))
 police = pygame.font.SysFont(None, 25)
 
-bouton_vie = {"rect":pygame.draw.rect(fenetre, (50,150,90), (50,500,200,60)),
-"txt": police.render("ameliorer vie",True,(255,255,255)),"prix":10,"couleur":(50,150,90)}
+bouton_vie = {"rect":pygame.Rect((150,500,250,60)),"txt": police.render("ameliorer vie",True,(255,255,255)),"prix":10,"couleur":(50,150,90)}
 
-bouton_attaque = {"rect":pygame.draw.rect(fenetre, (180,80,60), (300,500,200,60)),
-"txt" : police.render("ameliorer degats",True,(255,255,255)),"prix":10,"couleur":(180,80,60)}
+bouton_attaque = {"rect":pygame.Rect((450,500,250,60)),"txt" : police.render("ameliorer degats",True,(255,255,255)),"prix":10,"couleur":(180,80,60)}
 
-bouton_inventaire = {"rect":pygame.draw.rect(fenetre, (180,150,60), (550,500,200,60)),
-"txt": police.render("inventaire",True,(255,255,255)),"prix":10,"couleur":(180,150,60)}
+bouton_inventaire = bouton_inventaire = {"rect":pygame.draw.rect(fenetre, (180,150,60), (670,10,150,100)),"img":sac_img,"prix":10,}
 liste_bt =[bouton_vie,bouton_attaque,bouton_inventaire]
 
-# xp_cadre = pygame.image.load("images/fire.png")
-# xp_cadre = pygame.transform.scale(xp_cadre, (100, 100))
+xp_cadre = pygame.image.load("images/xp_cadre.png")
+xp_cadre = pygame.transform.scale(xp_cadre, (210, 210))
+
+xp_circle = pygame.image.load("images/ui_xp2.png")
+xp_circle = pygame.transform.scale(xp_circle, (80, 45))
 
 def DrawFond():
 	fenetre.blit(paysage_img, (0, 0))
@@ -55,18 +58,16 @@ def DrawJoueur(pos, hero):
 def DrawUpgrade(liste_bt):
 	pygame.draw.rect(fenetre, (35, 35, 45), (0, 460, 800, 140))
 	for bouton in liste_bt:
-		pygame.draw.rect(fenetre,bouton["couleur"],bouton["rect"])
-		fenetre.blit(bouton["txt"], bouton["txt"].get_rect(center = bouton["rect"].center))
+		if "couleur" in bouton:
+			pygame.draw.rect(fenetre,bouton["couleur"],bouton["rect"])
+			fenetre.blit(bouton["txt"], bouton["txt"].get_rect(center = bouton["rect"].center))
+		else:
+			fenetre.blit(bouton["img"],bouton["rect"])
 
 def DrawXP(hero):
-	txt_xp = police.render(f" level: {hero.xp["niveau"]}",True,(0,0,0)) 
-	fenetre.blit(txt_xp,(210, 25))
-	pygame.draw.rect(fenetre, (40, 40, 40), (10,10,200,50))
-	progression = 190 * hero.xp["actuelle"] / hero.xp["max"]
-	pygame.draw.rect(fenetre, (80, 1, 47), (15,15,progression,40))
-
-# def DrawXP(hero):
-#	txt_xp = police.render(f" level: {hero.xp["niveau"]}",True,(0,0,0)) 
-#	progression = 190 * hero.xp["actuelle"] / hero.xp["max"]
-#	pygame.draw.rect(fenetre, (18, 243, 18), (32,32,progression,26))
-#	fenetre.blit(xp_cadre, (0,-63))
+	txt_xp = police.render(f"{hero.xp["niveau"]}",True,(0,0,0)) 
+	progression = 150 * hero.xp["actuelle"] / hero.xp["max"]
+	pygame.draw.rect(fenetre, (18, 243, 18), (32,55,progression,26))
+	fenetre.blit(xp_cadre, (0,-40))
+	fenetre.blit(xp_circle, (65,0))
+	fenetre.blit(txt_xp,(100, 15))
