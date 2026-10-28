@@ -15,13 +15,13 @@ class Jeu:
 		return perso.vie > 0
 
 	def action_ennemi(self, en):
-		temp = pygame.time.get_ticks()
-		if temp - en.last_action >= 1000:
 			if en.pos[0] >= 150:
-				en.change_pos(-25, 0)
+				en.change_pos(en.vitesse, 0)
 			else:
-				self.hero.change_valeur("vie", -en.attaque)
-			en.change_temps(temp)
+				temp = pygame.time.get_ticks()
+				if temp - en.last_action >= 2000:
+					self.hero.change_valeur("vie", -en.attaque)
+					en.change_temps(temp)
 
 	def spawn_ennemi(self):
 		if len(self.tab) < 4:
@@ -33,25 +33,25 @@ class Jeu:
 	def type_ennemi(self, x, y):
 		luk = random.randint(1,100)
 		if luk <= 60:
-			ennemi = Ennemie(40,10, 0, [x, y, 50, 50], 1)
+			ennemi = Ennemie(40,3, 0, [x, y, 50, 50], 1, -0.4)
 		elif luk <= 80:
-			ennemi = Ennemie(65,10, 0, [x, y, 50, 50], 2)
+			ennemi = Ennemie(65,5, 0, [x, y, 50, 50], 2, -0.35)
 		else:
-			ennemi = Ennemie(100,10, 0, [x, y, 50, 50], 3)
+			ennemi = Ennemie(100,20, 0, [x, y, 50, 50], 3, -0.2)
 		return ennemi
 
 	def attaque_hero(self):
 		temp = pygame.time.get_ticks()
+		ennemi_cible = self.tab[0] # à changer !!!
 		if temp - self.hero.last_action >= 3000 and len(self.tab) > 0:
-			ennemi_cible = self.tab[0]
 			proj = Projectile([self.hero_pos[0] + self.hero_pos[2], self.hero_pos[1] + 25], 10, [ennemi_cible.pos[0], ennemi_cible.pos[1]])
 			self.tab_proj.append(proj)
 			self.hero.change_temps(temp)
 		if self.action_projectile():
-			self.tab[0].change_valeur("vie", -self.hero.attaque)
-			if not self.est_vie(self.tab[0]):
-				self.verif_ennemi(self.tab[0])
-				self.tab.pop(0)
+			ennemi_cible.change_valeur("vie", -self.hero.attaque)
+			if not self.est_vie(ennemi_cible):
+				self.verif_ennemi(ennemi_cible)
+				self.tab.remove(ennemi_cible)
 
 	def action_projectile(self):
 		if len(self.tab_proj) > 0:
@@ -62,15 +62,10 @@ class Jeu:
 					return True
 
 	def verif_ennemi(self, ennemi_cible): #peut etre futur pr global recompenses
-		if ennemi_cible.level == 1:
-			self.hero.change_dico("actuelle", 5)
-			self.hero.change_valeur("argent", 5)
-		elif ennemi_cible.level == 2:
-			self.hero.change_dico("actuelle", 10)
-			self.hero.change_valeur("argent", 10)
-		elif ennemi_cible.level == 3:
-			self.hero.change_dico("actuelle", 20)
-			self.hero.change_valeur("argent", 20)
+		for i in range (1, 4):
+			if ennemi_cible.level == i:
+				self.hero.change_dico("actuelle", 5 * i)
+				self.hero.change_valeur("argent", 5 * i)
 		self.hero.verif_level()
 
 	def est_argent(self, bouton):

@@ -1,10 +1,11 @@
 class Ennemie:
-	def __init__(self, vie, attaque, last_action,pos, level):
+	def __init__(self, vie, attaque, last_action,pos, level, vitesse ): # ??? vitesse
 		self.vie = vie
 		self.attaque = attaque
 		self.last_action = last_action
 		self.pos = pos #liste [x, y, x taille, y taille]
 		self.level = level
+		self.vitesse = vitesse
 
 	def change_valeur(self,valeur, new): # vie / attaque / max_vie 
 			act = getattr(self, valeur)
