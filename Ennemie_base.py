@@ -18,3 +18,5 @@ class Ennemie:
 	
 	def __str__(self):
 		return f"{self.pos}"
+
+#vitesse ennemie diff ?

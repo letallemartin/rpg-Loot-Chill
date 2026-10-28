@@ -23,3 +23,4 @@ class Hero:
 		if self.xp["actuelle"] >  self.xp["max"]:
 			self.xp["niveau"] += 1
 			self.xp["actuelle"] -= self.xp["max"] #pr garder le surplu d'xp (ex 130 xp = 30xp et 1 niv)
+			#retardataire pro max

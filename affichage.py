@@ -1,7 +1,7 @@
 import pygame
 
 joueur_img = pygame.image.load("images/hero1.png")
-joueur_img = pygame.transform.scale(joueur_img, (125, 125))
+joueur_img = pygame.transform.scale(joueur_img, (150, 150))
 paysage_img = pygame.image.load("images/paysage.jpeg")
 
 slime_img = pygame.image.load("images/slime.png")
@@ -21,10 +21,9 @@ fenetre = pygame.display.set_mode((800, 600))
 police = pygame.font.SysFont(None, 25)
 
 bouton_vie = {"rect":pygame.Rect((150,500,250,60)),"txt": police.render("ameliorer vie",True,(255,255,255)),"prix":10,"couleur":(50,150,90)}
-
 bouton_attaque = {"rect":pygame.Rect((450,500,250,60)),"txt" : police.render("ameliorer degats",True,(255,255,255)),"prix":10,"couleur":(180,80,60)}
-
 bouton_inventaire = bouton_inventaire = {"rect":pygame.draw.rect(fenetre, (180,150,60), (670,10,150,100)),"img":sac_img,"prix":10,}
+
 liste_bt =[bouton_vie,bouton_attaque,bouton_inventaire]
 
 xp_cadre = pygame.image.load("images/xp_cadre.png")

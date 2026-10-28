@@ -5,7 +5,7 @@ from Ennemie_base import Ennemie
 pygame.init()
 import affichage
 
-joueur = [50,200,50,50]
+joueur = [50,200,75,75]
 hero1 = Hero(100,100,10,1000,0)
 jeu = Jeu([], hero1, [joueur[0], joueur[1], joueur[2], joueur[3]], [])
 
@@ -15,6 +15,7 @@ clock = pygame.time.Clock()
 
 while running:
 	affichage.DrawFond()
+	print("martin retardataire")
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			running = False
