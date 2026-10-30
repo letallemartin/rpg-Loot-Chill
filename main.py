@@ -24,7 +24,6 @@ def clic_player(running):
 					print(f"vie={hero1.vie}")
 				elif affichage.liste_bt[1]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[1]): #bouton attaque +
 					hero1.change_valeur("attaque",10)
-					hero1.argent -= 10
 					print(f"att={hero1.attaque}")
 				elif affichage.liste_bt[2]["rect"].collidepoint(event.pos):
 					print(f"inv=oui")

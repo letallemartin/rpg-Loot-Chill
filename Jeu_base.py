@@ -77,5 +77,7 @@ class Jeu:
 
 	def est_argent(self, bouton):
 		if self.hero.argent >= bouton["prix"]:
+			self.hero.change_valeur("argent", - bouton["prix"])
 			bouton["prix"] *= 1.2
+			bouton["prix"] = round(bouton["prix"],22)
 			return True
