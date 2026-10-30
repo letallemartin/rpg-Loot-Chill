@@ -20,9 +20,9 @@ sac_img = pygame.transform.scale(sac_img, (150, 100))
 fenetre = pygame.display.set_mode((800, 600))
 police = pygame.font.SysFont(None, 25)
 
-bouton_vie = {"rect":pygame.Rect((150,500,250,60)),"txt": police.render("ameliorer vie",True,(255,255,255)),"prix":10,"couleur":(50,150,90)}
-bouton_attaque = {"rect":pygame.Rect((450,500,250,60)),"txt" : police.render("ameliorer degats",True,(255,255,255)),"prix":10,"couleur":(180,80,60)}
-bouton_inventaire = bouton_inventaire = {"rect":pygame.draw.rect(fenetre, (180,150,60), (670,10,150,100)),"img":sac_img,"prix":10,}
+bouton_vie = {"rect":pygame.Rect((150,500,250,60)),"txt": "ameliorer vie","prix":10,"couleur":(50,150,90)}
+bouton_attaque = {"rect":pygame.Rect((450,500,250,60)),"txt" :"ameliorer degats","prix":10,"couleur":(180,80,60)}
+bouton_inventaire = {"rect":pygame.draw.rect(fenetre, (180,150,60), (670,10,150,100)),"img":sac_img}
 
 liste_bt =[bouton_vie,bouton_attaque,bouton_inventaire]
 
@@ -42,8 +42,9 @@ def DrawEnnemi(ennemi):
 		fenetre.blit(slime_img2, (ennemi.pos[0], ennemi.pos[1]))
 	else:
 		fenetre.blit(slime_img3, (ennemi.pos[0], ennemi.pos[1]))
-	text1 = police.render(f"PV: {ennemi.vie}", True, (20, 20, 20))
+	text1 = police.render(f"PV: {ennemi.vie}", True, (217, 54, 62))
 	fenetre.blit(text1, (ennemi.pos[0] + 35, ennemi.pos[1] + 10))
+
 
 def DrawFire(projectile):
 	fire_img2 = pygame.transform.rotate(fire_img, projectile.angle)
@@ -51,15 +52,17 @@ def DrawFire(projectile):
 
 def DrawJoueur(pos, hero):
 	fenetre.blit(joueur_img, (pos[0], pos[1]))
-	text2 = police.render(f"PV: {hero.vie}", True, (20, 20, 20))
-	fenetre.blit(text2, (pos[0] + 25, pos[1] - 5))
+	text2 = police.render(f"PV: {hero.vie}", True, (50, 180, 90))
+	fenetre.blit(text2, (pos[0] + 35, pos[1] - 5))
 
 def DrawUpgrade(liste_bt):
 	pygame.draw.rect(fenetre, (35, 35, 45), (0, 460, 800, 140))
 	for bouton in liste_bt:
 		if "couleur" in bouton:
 			pygame.draw.rect(fenetre,bouton["couleur"],bouton["rect"])
-			fenetre.blit(bouton["txt"], bouton["txt"].get_rect(center = bouton["rect"].center))
+			affi_prix = f"{bouton['txt']}   {bouton['prix']} $"
+			affi_txt = police.render(affi_prix,True,(255,255,255))
+			fenetre.blit(affi_txt, affi_txt.get_rect(center = bouton["rect"].center))
 		else:
 			fenetre.blit(bouton["img"],bouton["rect"])
 

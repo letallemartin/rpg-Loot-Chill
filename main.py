@@ -9,12 +9,10 @@ joueur = [50,200,75,75]
 hero1 = Hero(100,100,10,1000,0)
 jeu = Jeu([], hero1, [joueur[0], joueur[1], joueur[2], joueur[3]], [])
 
+clock = pygame.time.Clock()
 running = True
 
-clock = pygame.time.Clock()
-
-while running:
-	affichage.DrawFond()
+def clic_player(running):
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			running = False
@@ -30,20 +28,28 @@ while running:
 					print(f"att={hero1.attaque}")
 				elif affichage.liste_bt[2]["rect"].collidepoint(event.pos):
 					print(f"inv=oui")
+	return running
 
-	jeu.spawn_ennemi()
-	jeu.attaque_hero()
-	for i in range (len(jeu.tab_proj)):
-		proj = jeu.tab_proj[i]
-		affichage.DrawFire(proj)
-	for i in range(len(jeu.tab)):
-		ennemi = jeu.tab[i]
-		jeu.action_ennemi(ennemi)
-		affichage.DrawEnnemi(ennemi)
-	
-	affichage.DrawUpgrade(affichage.liste_bt)
-	affichage.DrawJoueur(joueur, hero1)
-	affichage.DrawXP(hero1)
-	
-	pygame.display.flip()
+
+def boucle(running):
+	while running:
+		running = clic_player(running)
+		affichage.DrawFond()
+		jeu.spawn_ennemi()
+		jeu.attaque_hero()
+		for i in range (len(jeu.tab_proj)):
+			proj = jeu.tab_proj[i]
+			affichage.DrawFire(proj)
+		for i in range(len(jeu.tab)):
+			ennemi = jeu.tab[i]
+			# jeu.AnimeEnnemie(ennemi)
+			jeu.action_ennemi(ennemi)
+			affichage.DrawEnnemi(ennemi)
+		
+		affichage.DrawUpgrade(affichage.liste_bt)
+		affichage.DrawJoueur(joueur, hero1)
+		affichage.DrawXP(hero1)
+		
+		pygame.display.flip()
+boucle(running)
 pygame.quit()

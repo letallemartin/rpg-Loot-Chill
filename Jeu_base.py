@@ -14,6 +14,13 @@ class Jeu:
 	def est_vie(self, perso):
 		return perso.vie > 0
 
+	# def AnimeEnnemie(self, ennemi):
+	# 	if ennemi.pos[3] >= 75:
+	# 		ennemi.change_pos(-1, 3)
+	# 	elif ennemi.pos[3] < 25:
+	# 		ennemi.change_pos(1, 3)
+	# 	print(ennemi.pos[3])
+
 	def action_ennemi(self, en):
 			if en.pos[0] >= 150:
 				en.change_pos(en.vitesse, 0)
@@ -39,7 +46,7 @@ class Jeu:
 		else:
 			ennemi = Ennemie(100,20, 0, [x, y, 50, 50], 3, -0.2)
 		return ennemi
-
+	
 	def attaque_hero(self):
 		temp = pygame.time.get_ticks()
 		ennemi_cible = self.tab[0] # à changer !!!
