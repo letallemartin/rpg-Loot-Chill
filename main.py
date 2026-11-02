@@ -41,14 +41,13 @@ def boucle(running):
 			affichage.DrawFire(proj)
 		for i in range(len(jeu.tab)):
 			ennemi = jeu.tab[i]
-			# jeu.AnimeEnnemie(ennemi)
 			jeu.action_ennemi(ennemi)
 			affichage.DrawEnnemi(ennemi)
 		
 		affichage.DrawUpgrade(affichage.liste_bt)
 		affichage.DrawJoueur(joueur, hero1)
 		affichage.DrawXP(hero1)
-		
+		affichage.DrawArgent(hero1)
 		pygame.display.flip()
 boucle(running)
 pygame.quit()

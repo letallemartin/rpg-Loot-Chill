@@ -29,8 +29,8 @@ liste_bt =[bouton_vie,bouton_attaque,bouton_inventaire]
 xp_cadre = pygame.image.load("images/xp_cadre.png")
 xp_cadre = pygame.transform.scale(xp_cadre, (210, 210))
 
-xp_circle = pygame.image.load("images/ui_xp2.png")
-xp_circle = pygame.transform.scale(xp_circle, (80, 45))
+gold_img = pygame.image.load("images/ui_xp2.png") # a modif nom png
+gold_img = pygame.transform.scale(gold_img, (80, 45))
 
 def DrawFond():
 	fenetre.blit(paysage_img, (0, 0))
@@ -64,12 +64,17 @@ def DrawUpgrade(liste_bt):
 			affi_txt = police.render(affi_prix,True,(255,255,255))
 			fenetre.blit(affi_txt, affi_txt.get_rect(center = bouton["rect"].center))
 		else:
-			fenetre.blit(bouton["img"],bouton["rect"])
+			pass
 
 def DrawXP(hero):
-	txt_xp = police.render(f"{hero.xp["niveau"]}",True,(0,0,0)) 
+	txt_xp = police.render(str(hero.xp["niveau"]),True,(0,0,0)) 
 	progression = 150 * hero.xp["actuelle"] / hero.xp["max"]
-	pygame.draw.rect(fenetre, (18, 243, 18), (32,55,progression,26))
-	fenetre.blit(xp_cadre, (0,-40))
-	fenetre.blit(xp_circle, (65,0))
-	fenetre.blit(txt_xp,(100, 15))
+	pygame.draw.rect(fenetre, (18, 243, 18), (32,25,progression,26))
+	fenetre.blit(xp_cadre, (0,-70))
+	fenetre.blit(txt_xp,(100,29))
+ 
+def DrawArgent(hero):
+    txt_argent = police.render(str(round(hero.argent, 1)),True,(0,0,0))
+    fenetre.blit(gold_img, (640,0))
+    fenetre.blit(txt_argent,(702,15))
+    

@@ -50,7 +50,7 @@ class Jeu:
 	def attaque_hero(self):
 		temp = pygame.time.get_ticks()
 		ennemi_cible = self.tab[0] # à changer !!!
-		if temp - self.hero.last_action >= 3000 and len(self.tab) > 0:
+		if temp - self.hero.last_action >= 1000 and len(self.tab) > 0:
 			proj = Projectile([self.hero_pos[0] + self.hero_pos[2], self.hero_pos[1] + 25], 10, [ennemi_cible.pos[0], ennemi_cible.pos[1]])
 			self.tab_proj.append(proj)
 			self.hero.change_temps(temp)
@@ -79,5 +79,5 @@ class Jeu:
 		if self.hero.argent >= bouton["prix"]:
 			self.hero.change_valeur("argent", - bouton["prix"])
 			bouton["prix"] *= 1.2
-			bouton["prix"] = round(bouton["prix"],22)
+			bouton["prix"] = round(bouton["prix"],2)
 			return True
