@@ -42,7 +42,7 @@ def DrawEnnemi(ennemi):
 		fenetre.blit(slime_img2, (ennemi.pos[0], ennemi.pos[1]))
 	else:
 		fenetre.blit(slime_img3, (ennemi.pos[0], ennemi.pos[1]))
-	text1 = police.render(f"PV: {ennemi.vie}", True, (217, 54, 62))
+	text1 = police.render(f"PV: {ennemi.vie}", True, (0,0,0))
 	fenetre.blit(text1, (ennemi.pos[0] + 35, ennemi.pos[1] + 10))
 
 
@@ -52,7 +52,7 @@ def DrawFire(projectile):
 
 def DrawJoueur(pos, hero):
 	fenetre.blit(joueur_img, (pos[0], pos[1]))
-	text2 = police.render(f"PV: {hero.vie}", True, (50, 180, 90))
+	text2 = police.render(f"PV: {hero.vie}", True, (0,0,0))
 	fenetre.blit(text2, (pos[0] + 35, pos[1] - 5))
 
 def DrawUpgrade(liste_bt):

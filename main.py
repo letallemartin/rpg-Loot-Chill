@@ -6,7 +6,7 @@ pygame.init()
 import affichage
 
 joueur = [50,200,75,75]
-hero1 = Hero(100,100,10,1000,0)
+hero1 = Hero(100,100,20,1000,0)
 jeu = Jeu([], hero1, [joueur[0], joueur[1], joueur[2], joueur[3]], [])
 
 clock = pygame.time.Clock()

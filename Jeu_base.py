@@ -40,11 +40,11 @@ class Jeu:
 	def type_ennemi(self, x, y):
 		luk = random.randint(1,100)
 		if luk <= 60:
-			ennemi = Ennemie(40,3, 0, [x, y, 50, 50], 1, -0.4)
+			ennemi = Ennemie(40,3, 0, [x, y, 50, 50], 1, -0.3)
 		elif luk <= 80:
-			ennemi = Ennemie(65,5, 0, [x, y, 50, 50], 2, -0.35)
+			ennemi = Ennemie(65,5, 0, [x, y, 50, 50], 2, -0.20)
 		else:
-			ennemi = Ennemie(100,20, 0, [x, y, 50, 50], 3, -0.2)
+			ennemi = Ennemie(100,20, 0, [x, y, 50, 50], 3, -0.1)
 		return ennemi
 	
 	def attaque_hero(self):
