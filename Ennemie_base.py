@@ -7,7 +7,7 @@ class Ennemie:
 		self.level = level
 		self.vitesse = vitesse
 
-	def change_valeur(self,valeur, new): # vie / attaque / max_vie 
+	def change_valeur(self,valeur, new): # vie / attaque / max_vie
 			act = getattr(self, valeur)
 			setattr(self, valeur, act + new)
 	

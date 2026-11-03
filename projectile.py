@@ -8,9 +8,9 @@ class Projectile:
 
 	def deplace_projectile(self):
 		try:
-			pente = (self.pos_cible[1] - self.pos[1] + 25) / (self.pos_cible[0] - self.pos[0] + 25)
+			pente = (self.pos_cible[1] - self.pos[1] + 40) / (self.pos_cible[0] - self.pos[0] + 40)
 			self.pos[0] += 3
-			self.pos[1] += pente * 2
+			self.pos[1] += pente * 3
 			self.angle = - ((math.atan(pente) * 180) / math.pi) # 45 = diff d'angle dui png
 		except ZeroDivisionError:
 			pass

@@ -49,5 +49,6 @@ def boucle(running):
 		affichage.DrawXP(hero1)
 		affichage.DrawArgent(hero1)
 		pygame.display.flip()
+		clock.tick(120)
 boucle(running)
 pygame.quit()
