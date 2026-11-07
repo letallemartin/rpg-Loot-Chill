@@ -14,17 +14,14 @@ slime_img3 = pygame.transform.scale(slime_img3, (150, 150))
 fire_img = pygame.image.load("images/fire.png")
 fire_img = pygame.transform.scale(fire_img, (100, 100))
 
-sac_img = pygame.image.load("images/sac.png")
-sac_img = pygame.transform.scale(sac_img, (150, 100))
-
-fenetre = pygame.display.set_mode((800, 600))
+fenetre = pygame.display.set_mode((1000, 700))
 police = pygame.font.SysFont(None, 25)
 
-bouton_vie = {"rect":pygame.Rect((150,500,250,60)),"txt": "ameliorer vie","prix":10,"couleur":(50,150,90)}
-bouton_attaque = {"rect":pygame.Rect((450,500,250,60)),"txt" :"ameliorer degats","prix":10,"couleur":(180,80,60)}
-bouton_inventaire = {"rect":pygame.draw.rect(fenetre, (180,150,60), (670,10,150,100)),"img":sac_img}
+bouton_maxvie = {"rect":pygame.Rect((300,500,150,60)),"txt": "+ max vie","prix":10,"couleur":(50,150,90)}
+bouton_attaque = {"rect":pygame.Rect((500,500,150,60)),"txt" :"+ degats","prix":10,"couleur":(180,80,60)}
+bouton_vie = {"rect":pygame.Rect((100,500,150,60)),"txt" :"heal","prix":100,"couleur": (27,10,150)}
 
-liste_bt =[bouton_vie,bouton_attaque,bouton_inventaire]
+liste_bt =[bouton_maxvie,bouton_attaque,bouton_vie]
 
 xp_cadre = pygame.image.load("images/xp_cadre.png")
 xp_cadre = pygame.transform.scale(xp_cadre, (210, 210))
@@ -58,13 +55,10 @@ def DrawJoueur(pos, hero):
 def DrawUpgrade(liste_bt):
 	pygame.draw.rect(fenetre, (35, 35, 45), (0, 460, 800, 140))
 	for bouton in liste_bt:
-		if "couleur" in bouton:
-			pygame.draw.rect(fenetre,bouton["couleur"],bouton["rect"])
-			affi_prix = f"{bouton['txt']}   {bouton['prix']} $"
-			affi_txt = police.render(affi_prix,True,(255,255,255))
-			fenetre.blit(affi_txt, affi_txt.get_rect(center = bouton["rect"].center))
-		else:
-			pass
+		pygame.draw.rect(fenetre,bouton["couleur"],bouton["rect"])
+		affi_prix = f"{bouton['txt']}   {bouton['prix']} $"
+		affi_txt = police.render(affi_prix,True,(255,255,255))
+		fenetre.blit(affi_txt, affi_txt.get_rect(center = bouton["rect"].center))
 
 def DrawXP(hero):
 	txt_xp = police.render(str(hero.xp["niveau"]),True,(0,0,0)) 
@@ -77,4 +71,3 @@ def DrawArgent(hero):
     txt_argent = police.render(str(round(hero.argent, 1)),True,(0,0,0))
     fenetre.blit(gold_img, (640,0))
     fenetre.blit(txt_argent,(702,15))
-    

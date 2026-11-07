@@ -14,12 +14,12 @@ class Jeu:
 	def est_vie(self, perso):
 		return perso.vie > 0
 
-	# def AnimeEnnemie(self, ennemi):
-	# 	if ennemi.pos[3] >= 75:
-	# 		ennemi.change_pos(-1, 3)
-	# 	elif ennemi.pos[3] < 25:
-	# 		ennemi.change_pos(1, 3)
-	# 	print(ennemi.pos[3])
+	def AnimeEnnemie(self, ennemi):
+		if ennemi.pos[3] >= 75:
+			ennemi.change_pos(-1, 3)
+		elif ennemi.pos[3] < 25:
+			ennemi.change_pos(1, 3)
+		print(ennemi.pos[3])
 
 	def action_ennemi(self, en):
 			if en.pos[0] >= 150:
@@ -75,9 +75,11 @@ class Jeu:
 				self.hero.change_valeur("argent", 5 * i)
 		self.hero.verif_level()
 
+	def change_prix(self,bouton):
+		bouton["prix"] *= 1.2
+		bouton["prix"] = round(bouton["prix"],2)
+
 	def est_argent(self, bouton):
 		if self.hero.argent >= bouton["prix"]:
 			self.hero.change_valeur("argent", - bouton["prix"])
-			bouton["prix"] *= 1.2
-			bouton["prix"] = round(bouton["prix"],2)
 			return True

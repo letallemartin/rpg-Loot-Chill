@@ -7,9 +7,15 @@ class Hero:
 		self.last_action = last_action
 		self.xp = xp #dico
 
-	def change_valeur(self,valeur, new):
+	def change_vie(self, new):
+		self.vie += new
+		if self.vie > self.vie_max:
+			self.vie = self.vie_max
+
+	def change_valeur(self,valeur, new): #attaque, argent
 		act = getattr(self, valeur)
 		setattr(self, valeur, act + new)
+
 
 	def change_temps(self, new): #temp
 		self.last_action = new

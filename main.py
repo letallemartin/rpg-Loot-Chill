@@ -6,7 +6,7 @@ pygame.init()
 import affichage
 
 joueur = [50,200,75,75]
-hero1 = Hero(100,100,20,1000,0)
+hero1 = Hero(100,100,1,1000,0)
 jeu = Jeu([], hero1, [joueur[0], joueur[1], joueur[2], joueur[3]], [])
 
 clock = pygame.time.Clock()
@@ -18,12 +18,19 @@ def clic_player(running):
 			running = False
 		elif event.type == pygame.MOUSEBUTTONDOWN :
 			if event.button == 1 :
-				if affichage.liste_bt[0]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[0]): #bouton vie +
+				if affichage.liste_bt[0]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[0]): #bouton max vie +
 					hero1.change_valeur("max_vie",10)
-					hero1.change_valeur("vie",10)
-					print(f"vie={hero1.vie}")
+					jeu.change_prix(affichage.liste_bt[0])
+				elif affichage.liste_bt[2]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[2]): #bouton vie +
+					hero1.vie = hero1.change_vie(25)
+					jeu.change_prix(affichage.liste_bt[2])
 				elif affichage.liste_bt[1]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[1]): #bouton attaque +
 					hero1.change_valeur("attaque",10)
+					jeu.change_prix(affichage.liste_bt[1])
+					
+
+
+
 					print(f"att={hero1.attaque}")
 				elif affichage.liste_bt[2]["rect"].collidepoint(event.pos):
 					print(f"inv=oui")
@@ -48,6 +55,10 @@ def boucle(running):
 		affichage.DrawJoueur(joueur, hero1)
 		affichage.DrawXP(hero1)
 		affichage.DrawArgent(hero1)
+
+		if not jeu.est_vie(hero1):
+			running = False
+
 		pygame.display.flip()
 		clock.tick(120)
 boucle(running)
