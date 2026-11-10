@@ -9,8 +9,8 @@ class Hero:
 
 	def change_vie(self, new):
 		self.vie += new
-		if self.vie > self.vie_max:
-			self.vie = self.vie_max
+		if self.vie > self.max_vie:
+			self.vie = self.max_vie
 
 	def change_valeur(self,valeur, new): #attaque, argent
 		act = getattr(self, valeur)

@@ -14,7 +14,7 @@ slime_img3 = pygame.transform.scale(slime_img3, (150, 150))
 fire_img = pygame.image.load("images/fire.png")
 fire_img = pygame.transform.scale(fire_img, (100, 100))
 
-fenetre = pygame.display.set_mode((1000, 700))
+fenetre = pygame.display.set_mode((800, 600))
 police = pygame.font.SysFont(None, 25)
 
 bouton_maxvie = {"rect":pygame.Rect((300,500,150,60)),"txt": "+ max vie","prix":10,"couleur":(50,150,90)}
