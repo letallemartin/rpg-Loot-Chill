@@ -20,9 +20,10 @@ def clic_player(running):
 			if event.button == 1 :
 				if affichage.liste_bt[0]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[0]): #bouton max vie +
 					hero1.change_valeur("max_vie",10)
+					hero1.change_vie(10)
 					jeu.change_prix(affichage.liste_bt[0])
 				elif affichage.liste_bt[2]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[2]): #bouton vie +
-					hero1.vie = hero1.change_vie(25)
+					hero1.change_vie(25)
 					jeu.change_prix(affichage.liste_bt[2])
 				elif affichage.liste_bt[1]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[1]): #bouton attaque +
 					hero1.change_valeur("attaque",10)
@@ -55,7 +56,7 @@ def boucle(running):
 		affichage.DrawJoueur(joueur, hero1)
 		affichage.DrawXP(hero1)
 		affichage.DrawArgent(hero1)
-
+		print(hero1.vie > 0)
 		if not jeu.est_vie(hero1):
 			running = False
 
