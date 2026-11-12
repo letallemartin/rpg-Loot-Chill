@@ -6,7 +6,7 @@ pygame.init()
 import affichage
 
 joueur = [50,200,75,75]
-hero1 = Hero(100,100,1,1000,0)
+hero1 = Hero(100,100,6,1000,0)
 jeu = Jeu([], hero1, [joueur[0], joueur[1], joueur[2], joueur[3]], [])
 
 clock = pygame.time.Clock()
@@ -24,7 +24,6 @@ def clic_player(running):
 					jeu.change_prix(affichage.liste_bt[0])
 				elif affichage.liste_bt[2]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[2]): #bouton vie +
 					hero1.change_vie(25)
-					jeu.change_prix(affichage.liste_bt[2])
 				elif affichage.liste_bt[1]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[1]): #bouton attaque +
 					hero1.change_valeur("attaque",10)
 					jeu.change_prix(affichage.liste_bt[1])

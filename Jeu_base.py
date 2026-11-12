@@ -21,14 +21,14 @@ class Jeu:
 			ennemi.change_pos(1, 3)
 		print(ennemi.pos[3])
 
-	def action_ennemi(self, en):
-			if en.pos[0] >= 150:
-				en.change_pos(en.vitesse, 0)
-			else:
-				temp = pygame.time.get_ticks()
-				if temp - en.last_action >= 2000:
-					self.hero.change_valeur("vie", -en.attaque)
-					en.change_temps(temp)
+	def action_ennemi(self, ennemi):
+            if ennemi.pos[0] >= 150:
+                ennemi.change_pos(ennemi.vitesse, 0)
+            else:
+                temp = pygame.time.get_ticks()
+                if temp - ennemi.last_action >= 2000:
+                    self.hero.change_valeur("vie", -ennemi.attaque)
+                    ennemi.change_temps(temp)
 
 	def spawn_ennemi(self):
 		if len(self.tab) < 4:
@@ -39,18 +39,26 @@ class Jeu:
 
 	def type_ennemi(self, x, y):
 		luk = random.randint(1,100)
-		if luk <= 60:
-			ennemi = Ennemie(40,3, 0, [x, y, 50, 50], 1, -0.3)
-		elif luk <= 80:
+		if 60 <= luk <= 80 and self.hero.xp["niveau"] > 1:
 			ennemi = Ennemie(65,5, 0, [x, y, 50, 50], 2, -0.20)
-		else:
+		elif luk > 80 and self.hero.xp["niveau"] > 4:
 			ennemi = Ennemie(100,20, 0, [x, y, 50, 50], 3, -0.1)
+		else:
+			ennemi = Ennemie(40,3, 0, [x, y, 50, 50], 1, -0.3) 
 		return ennemi
-	
+
+	def ennemie_proche(self):
+		cible = self.tab[0]
+		for ennemie in self.tab[1:]:
+			if ennemie.pos[0] < cible.pos[0]:
+				cible = ennemie
+		return cible
+       
+			
 	def attaque_hero(self):
 		temp = pygame.time.get_ticks()
-		ennemi_cible = self.tab[0] # à changer !!!
-		if temp - self.hero.last_action >= 1000 and len(self.tab) > 0:
+		ennemi_cible = self.ennemie_proche()
+		if temp - self.hero.last_action >= 1500 and len(self.tab) > 0:
 			proj = Projectile([self.hero_pos[0] + self.hero_pos[2], self.hero_pos[1] + 25], 10, [ennemi_cible.pos[0], ennemi_cible.pos[1]])
 			self.tab_proj.append(proj)
 			self.hero.change_temps(temp)
@@ -62,10 +70,10 @@ class Jeu:
 
 	def action_projectile(self):
 		if len(self.tab_proj) > 0:
-			for pr in self.tab_proj:
-				pr.deplace_projectile()
-				if pr.est_touché():
-					self.tab_proj.remove(pr)
+			for projectile in self.tab_proj:
+				projectile.deplace_projectile()
+				if projectile.est_touché():
+					self.tab_proj.remove(projectile)
 					return True
 
 	def verif_ennemi(self, ennemi_cible): #peut etre futur pr global recompenses

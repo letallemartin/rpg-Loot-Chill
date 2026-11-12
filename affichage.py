@@ -49,7 +49,7 @@ def DrawFire(projectile):
 
 def DrawJoueur(pos, hero):
 	fenetre.blit(joueur_img, (pos[0], pos[1]))
-	text2 = police.render(f"PV: {hero.vie}", True, (0,0,0))
+	text2 = police.render(f"PV: {hero.vie} / {hero.max_vie}", True, (0,0,0))
 	fenetre.blit(text2, (pos[0] + 35, pos[1] - 5))
 
 def DrawUpgrade(liste_bt):
@@ -62,7 +62,7 @@ def DrawUpgrade(liste_bt):
 
 def DrawXP(hero):
 	txt_xp = police.render(str(hero.xp["niveau"]),True,(0,0,0)) 
-	progression = 150 * hero.xp["actuelle"] / hero.xp["max"]
+	progression = 145 * hero.xp["actuelle"] / hero.xp["max"]
 	pygame.draw.rect(fenetre, (18, 243, 18), (32,25,progression,26))
 	fenetre.blit(xp_cadre, (0,-70))
 	fenetre.blit(txt_xp,(100,29))
