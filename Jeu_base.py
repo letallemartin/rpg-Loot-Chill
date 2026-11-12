@@ -48,6 +48,7 @@ class Jeu:
 		return ennemi
 
 	def ennemie_proche(self):
+		
 		cible = self.tab[0]
 		for ennemie in self.tab[1:]:
 			if ennemie.pos[0] < cible.pos[0]:
@@ -57,16 +58,18 @@ class Jeu:
 			
 	def attaque_hero(self):
 		temp = pygame.time.get_ticks()
-		ennemi_cible = self.ennemie_proche()
 		if temp - self.hero.last_action >= 1500 and len(self.tab) > 0:
-			proj = Projectile([self.hero_pos[0] + self.hero_pos[2], self.hero_pos[1] + 25], 10, [ennemi_cible.pos[0], ennemi_cible.pos[1]])
-			self.tab_proj.append(proj)
+			ennemi_cible = self.ennemie_proche()
+			projectile = Projectile([self.hero_pos[0] + self.hero_pos[2], self.hero_pos[1] + 25], 10, ennemi_cible)
+			self.tab_proj.append(projectile)
 			self.hero.change_temps(temp)
+   
 		if self.action_projectile():
-			ennemi_cible.change_valeur("vie", -self.hero.attaque)
-			if not self.est_vie(ennemi_cible):
-				self.verif_ennemi(ennemi_cible)
-				self.tab.remove(ennemi_cible)
+			for proj in self.tab_proj:
+				proj.ennemi_cible.change_valeur("vie", -self.hero.attaque)
+				if not self.est_vie(proj.ennemi_cible):
+					self.verif_ennemi(proj.ennemi_cible)
+					self.tab.remove(proj)
 
 	def action_projectile(self):
 		if len(self.tab_proj) > 0:
