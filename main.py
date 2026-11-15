@@ -55,7 +55,7 @@ def boucle(running):
 		affichage.DrawJoueur(joueur, hero1)
 		affichage.DrawXP(hero1)
 		affichage.DrawArgent(hero1)
-		print(hero1.vie > 0)
+		#print(hero1.vie > 0)
 		if not jeu.est_vie(hero1):
 			running = False
 

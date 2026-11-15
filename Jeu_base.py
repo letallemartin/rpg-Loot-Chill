@@ -57,27 +57,29 @@ class Jeu:
        
 			
 	def attaque_hero(self):
+		
 		temp = pygame.time.get_ticks()
 		if temp - self.hero.last_action >= 1500 and len(self.tab) > 0:
 			ennemi_cible = self.ennemie_proche()
 			projectile = Projectile([self.hero_pos[0] + self.hero_pos[2], self.hero_pos[1] + 25], 10, ennemi_cible)
 			self.tab_proj.append(projectile)
 			self.hero.change_temps(temp)
-   
-		if self.action_projectile():
-			for proj in self.tab_proj:
-				proj.ennemi_cible.change_valeur("vie", -self.hero.attaque)
-				if not self.est_vie(proj.ennemi_cible):
-					self.verif_ennemi(proj.ennemi_cible)
-					self.tab.remove(proj)
 
-	def action_projectile(self):
+		for projectiles in self.tab_proj:
+			if self.action_projectile(projectiles):
+					projectiles.ennemi_cible.change_valeur("vie", -self.hero.attaque)
+					if not self.est_vie(projectiles.ennemi_cible):
+						self.verif_ennemi(projectiles.ennemi_cible)
+						print(projectiles)
+						self.tab.remove(projectiles.ennemi_cible)
+
+
+	def action_projectile(self, projectiles):
 		if len(self.tab_proj) > 0:
-			for projectile in self.tab_proj:
-				projectile.deplace_projectile()
-				if projectile.est_touché():
-					self.tab_proj.remove(projectile)
-					return True
+			projectiles.deplace_projectile()
+			if projectiles.est_touché():
+				self.tab_proj.remove(projectiles)
+				return True
 
 	def verif_ennemi(self, ennemi_cible): #peut etre futur pr global recompenses
 		for i in range (1, 4):
