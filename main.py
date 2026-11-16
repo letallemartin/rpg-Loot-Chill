@@ -22,18 +22,12 @@ def clic_player(running):
 					hero1.change_valeur("max_vie",10)
 					hero1.change_vie(10)
 					jeu.change_prix(affichage.liste_bt[0])
-				elif affichage.liste_bt[2]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[2]): #bouton vie +
+				elif affichage.liste_bt[2]["rect"].collidepoint(event.pos)and hero1.vie < hero1.max_vie and jeu.est_argent(affichage.liste_bt[2]): #bouton vie +
 					hero1.change_vie(25)
 				elif affichage.liste_bt[1]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[1]): #bouton attaque +
 					hero1.change_valeur("attaque",10)
 					jeu.change_prix(affichage.liste_bt[1])
-					
-
-
-
-					print(f"att={hero1.attaque}")
-				elif affichage.liste_bt[2]["rect"].collidepoint(event.pos):
-					print(f"inv=oui")
+				
 	return running
 
 
