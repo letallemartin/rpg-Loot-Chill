@@ -57,7 +57,6 @@ class Jeu:
        
 			
 	def attaque_hero(self):
-		
 		temp = pygame.time.get_ticks()
 		if temp - self.hero.last_action >= 1500 and len(self.tab) > 0:
 			ennemi_cible = self.ennemie_proche()

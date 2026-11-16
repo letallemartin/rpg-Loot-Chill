@@ -27,9 +27,7 @@ def clic_player(running):
 				elif affichage.liste_bt[1]["rect"].collidepoint(event.pos)and jeu.est_argent(affichage.liste_bt[1]): #bouton attaque +
 					hero1.change_valeur("attaque",10)
 					jeu.change_prix(affichage.liste_bt[1])
-				
 	return running
-
 
 def boucle(running):
 	while running:
@@ -44,15 +42,12 @@ def boucle(running):
 			ennemi = jeu.tab[i]
 			jeu.action_ennemi(ennemi)
 			affichage.DrawEnnemi(ennemi)
-		
 		affichage.DrawUpgrade(affichage.liste_bt)
 		affichage.DrawJoueur(joueur, hero1)
 		affichage.DrawXP(hero1)
 		affichage.DrawArgent(hero1)
-		#print(hero1.vie > 0)
 		if not jeu.est_vie(hero1):
 			running = False
-
 		pygame.display.flip()
 		clock.tick(120)
 boucle(running)
